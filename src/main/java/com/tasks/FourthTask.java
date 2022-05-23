@@ -27,6 +27,7 @@ public class FourthTask {
             for (int j = 0; j < gruppyis.size(); j++) {
                 if (gruppyis.get(i).getDataFormir().getYear() == gruppyis.get(j).getDataFormir().getYear() && i != j) {
                     if (gruppyis.get(i).getStudentyis().size() + gruppyis.get(j).getStudentyis().size() < lessThan) {
+                        System.out.println("Группы для объединения: " + gruppyis.get(i).getNazvanie() + ", " + gruppyis.get(i).getStudentyis().size() + "чел. и " + gruppyis.get(j).getNazvanie() + ", " + gruppyis.get(j).getStudentyis().size() + "чел." );
                         gruppyis.get(i).getStudentyis().addAll(gruppyis.get(j).getStudentyis());
                         for (Studentyi studentyi : gruppyis.get(j).getStudentyis()){
                             studentyi.setGruppyi(gruppyis.get(i));
@@ -34,18 +35,11 @@ public class FourthTask {
                         }
                         s.saveOrUpdate(gruppyis.get(i));
                         s.delete(gruppyis.get(j));
+                        System.out.println("Группы объединены в " + gruppyis.get(i).getNazvanie() + " c количеством учащихся: " + gruppyis.get(i).getStudentyis().size());
                     }
                 }
             }
         }
-//        for ()
-
-//        List<Gruppyi> grs1 = s.createQuery("from Gruppyi").list();
-//        for (Gruppyi gruppyi : grs1) {
-//            System.out.println("Size of " + gruppyi.getNazvanie() + " is: " + gruppyi.getStudentyis().size());
-//        }
-
-
 
         s.flush();
         t.commit();
